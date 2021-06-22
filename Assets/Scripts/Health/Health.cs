@@ -13,14 +13,12 @@ public class Health : MonoBehaviour
     [SerializeField] private float iFramesDuration;
     [SerializeField] private int numberOfFlashes;
     private SpriteRenderer spriteRend;
-    private PlayerMovement movement;
 
     private void Awake()
     {
         currentHealth = startingHealth;
         anim = GetComponent<Animator>();
         spriteRend = GetComponent<SpriteRenderer>();
-        movement = GetComponent<PlayerMovement>();
     }
     public void TakeDamage(float _damage)
     {
@@ -28,19 +26,15 @@ public class Health : MonoBehaviour
 
         if (currentHealth > 0)
         {
-            if (anim != null) anim.SetTrigger("hurt");
-            if (iFramesDuration > 0) StartCoroutine(Invunerability());
+            anim.SetTrigger("hurt");
+            StartCoroutine(Invunerability());
         }
         else
         {
             if (!dead)
             {
-                if (anim != null) anim?.SetTrigger("die");
-                else
-                { 
-                
-                }
-                if (movement != null) movement.enabled = false;
+                anim.SetTrigger("die");
+                GetComponent<PlayerMovement>().enabled = false;
                 dead = true;
             }
         }

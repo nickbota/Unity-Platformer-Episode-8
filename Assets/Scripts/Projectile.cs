@@ -27,8 +27,6 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        print(collision.tag);
-
         hit = true;
         boxCollider.enabled = false;
 
@@ -37,10 +35,6 @@ public class Projectile : MonoBehaviour
 
         if (anim != null) anim.SetTrigger("explode");
         else              gameObject.SetActive(false);
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        print(collision.gameObject.tag);
     }
     public void SetDirection(float _direction)
     {
